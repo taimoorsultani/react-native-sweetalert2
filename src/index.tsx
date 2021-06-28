@@ -55,6 +55,7 @@ type Sweetalert2Type = {
   setTitleSize(size: number): void;
   setSubTitleSize(size: number): void;
   showContentText(show: boolean): void;
+  multiply(a: number, b: number): Promise<number>;
 };
 
 export default Sweetalert2 as Sweetalert2Type;

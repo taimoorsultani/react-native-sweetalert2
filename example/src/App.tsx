@@ -4,6 +4,13 @@ import Sweetalert2 from 'react-native-sweetalert2';
 
 const App = () => {
   const loadingDialog = (): void => {
+    // Sweetalert2.multiply(2, 5)
+    //   .then((result) => {
+    //     console.log('Result is: ', result);
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error is: ', err);
+    //   });
     Sweetalert2.showAlert(
       {
         type: 'progress',
@@ -27,25 +34,25 @@ const App = () => {
       acceptCallback,
       cancelCallback
     );
-    setToSuccess();
+    // setToSuccess();
   };
 
-  const setToSuccess = () => {
-    setTimeout(() => {
-      Sweetalert2.setType('success');
-      Sweetalert2.setTitle('YAHOOOOO!');
-      Sweetalert2.setContentText('Request Completed');
-      Sweetalert2.showCancelButton(true);
-      Sweetalert2.showConfirmButton(true);
-      setToError();
-    }, 1500);
-  };
+  // const setToSuccess = () => {
+  //   setTimeout(() => {
+  //     Sweetalert2.setType('success');
+  //     Sweetalert2.setTitle('YAHOOOOO!');
+  //     Sweetalert2.setContentText('Request Completed');
+  //     Sweetalert2.showCancelButton(true);
+  //     Sweetalert2.showConfirmButton(true);
+  //     setToError();
+  //   }, 1500);
+  // };
 
-  const setToError = () => {
-    setTimeout(() => {
-      Sweetalert2.setType('error');
-    }, 1500);
-  };
+  // const setToError = () => {
+  //   setTimeout(() => {
+  //     Sweetalert2.setType('error');
+  //   }, 1500);
+  // };
 
   const simpleAlert = (): void => {
     Sweetalert2.showAlert(
@@ -189,37 +196,37 @@ const App = () => {
   };
 
   const deleteConfirm = () => {
-    Sweetalert2.setType('progress');
-    Sweetalert2.setTitle('DELETING');
-    Sweetalert2.setContentText('Please wait...');
-    setTimeout(() => {
-      Sweetalert2.setType('success');
-      Sweetalert2.setTitle('DELETED');
-      Sweetalert2.setContentText('Your imaginary file has been deleted');
-      Sweetalert2.showCancelButton(false);
-      Sweetalert2.setConfirmButtonText('OKAY');
-      // Sweetalert2.setConfirmCallback(acceptCallback, true);
-    }, 1500);
+    // Sweetalert2.setType('progress');
+    // Sweetalert2.setTitle('DELETING');
+    // Sweetalert2.setContentText('Please wait...');
+    // setTimeout(() => {
+    //   Sweetalert2.setType('success');
+    //   Sweetalert2.setTitle('DELETED');
+    //   Sweetalert2.setContentText('Your imaginary file has been deleted');
+    //   Sweetalert2.showCancelButton(false);
+    //   Sweetalert2.setConfirmButtonText('OKAY');
+    //   // Sweetalert2.setConfirmCallback(acceptCallback, true);
+    // }, 1500);
   };
 
   const deleteCancel = () => {
-    Sweetalert2.setType('error');
-    Sweetalert2.setTitle('CANCELLED');
-    Sweetalert2.setContentText('Your imaginary file is safe. Nothing happened');
-    Sweetalert2.showCancelButton(false);
-    Sweetalert2.setConfirmButtonText('OKAY');
-    // Sweetalert2.setConfirmCallback(acceptCallback, true);
+    // Sweetalert2.setType('error');
+    // Sweetalert2.setTitle('CANCELLED');
+    // Sweetalert2.setContentText('Your imaginary file is safe. Nothing happened');
+    // Sweetalert2.showCancelButton(false);
+    // Sweetalert2.setConfirmButtonText('OKAY');
+    // // Sweetalert2.setConfirmCallback(acceptCallback, true);
   };
 
   const alertWithoutButtons = () => {
-    Sweetalert2.initAlert();
-    Sweetalert2.setTitle('HELLO ALERT');
-    Sweetalert2.setTitleSize(15);
-    Sweetalert2.setContentText('Subtitle goes here');
-    Sweetalert2.setSubTitleSize(12);
-    Sweetalert2.showConfirmButton(false);
-    Sweetalert2.showCancelButton(false);
-    Sweetalert2.show();
+    // Sweetalert2.initAlert();
+    // Sweetalert2.setTitle('HELLO ALERT');
+    // Sweetalert2.setTitleSize(15);
+    // Sweetalert2.setContentText('Subtitle goes here');
+    // Sweetalert2.setSubTitleSize(12);
+    // Sweetalert2.showConfirmButton(false);
+    // Sweetalert2.showCancelButton(false);
+    // Sweetalert2.show();
   };
 
   return (

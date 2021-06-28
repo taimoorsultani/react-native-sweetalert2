@@ -32,11 +32,13 @@ public class Sweetalert2Module extends ReactContextBaseJavaModule {
     return NAME;
   }
 
+  /* Init Sweetalert */
   @ReactMethod
   public void initAlert() {
     sweetalert = new Sweetalert(Objects.requireNonNull(getCurrentActivity()));
   }
 
+  /* Show Sweetalert */
   @ReactMethod
   public void showAlert(ReadableMap options, final Callback acceptCallback, final Callback cancelCallback) {
     sweetalert = new Sweetalert(Objects.requireNonNull(getCurrentActivity()));
@@ -246,4 +248,10 @@ public class Sweetalert2Module extends ReactContextBaseJavaModule {
     sweetalert.showContentText(show);
   }
 
+  // Example method
+  // See https://reactnative.dev/docs/native-modules-android
+  @ReactMethod
+  public void multiply(int a, int b, Promise promise) {
+    promise.resolve(a * b * 2);
+  }
 }
