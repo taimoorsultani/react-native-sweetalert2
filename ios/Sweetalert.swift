@@ -16,6 +16,7 @@ public enum AlertStyle {
 }
 
 open class SweetAlert: UIViewController {
+    /* Core variables */
     let kBakcgroundTansperancy: CGFloat = 0.7
     let kHeightMargin: CGFloat = 10.0
     let KTopMargin: CGFloat = 20.0
@@ -26,14 +27,14 @@ open class SweetAlert: UIViewController {
     let kButtonHeight: CGFloat = 35.0
     var textViewHeight: CGFloat = 90.0
     let kTitleHeight:CGFloat = 30.0
-    var strongSelf:SweetAlert?
+    var strongSelf: SweetAlert?
     var contentView = UIView()
     var titleLabel: UILabel = UILabel()
     var buttons: [UIButton] = []
     var animatedView: AnimatableView?
-    var imageView:UIImageView?
+    var imageView: UIImageView?
     var subTitleTextView = UITextView()
-    var userAction:((_ isOtherButton: Bool) -> Void)? = nil
+    var userAction: ((_ isOtherButton: Bool) -> Void)? = nil
     let kFont = "Helvetica"
 
     init() {
@@ -43,7 +44,7 @@ open class SweetAlert: UIViewController {
         self.view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kBakcgroundTansperancy)
         self.view.addSubview(contentView)
 
-        //Retaining itself strongly so can exist without strong refrence
+        // Retaining itself strongly so can exist without strong refrence
         strongSelf = self
     }
 
@@ -190,13 +191,12 @@ open class SweetAlert: UIViewController {
             self.view.removeFromSuperview()
             self.cleanUpAlert()
 
-            //Releasing strong refrence of itself.
+            // Releasing strong refrence of itself.
             self.strongSelf = nil
         }
     }
 
     func cleanUpAlert() {
-
         if self.animatedView != nil {
             self.animatedView!.removeFromSuperview()
             self.animatedView = nil
@@ -216,34 +216,31 @@ open class SweetAlert: UIViewController {
 
     }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: UIColor.colorFromRGB(0xAEDEF4))
+    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
+        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: UIColor.colorFromRGB(0xAEDEF4))
         userAction = action
         return self
     }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: buttonColor,otherButtonTitle:
-            nil)
+    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String, buttonColor: UIColor,action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
+        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: buttonColor, otherButtonTitle: nil)
         userAction = action
         return self
     }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,otherButtonTitle:
-        String?, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle,buttonColor: buttonColor,otherButtonTitle:
-            otherButtonTitle,otherButtonColor: UIColor.red)
+    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, buttonColor: UIColor, otherButtonTitle: String?, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
+        self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: buttonColor, otherButtonTitle: otherButtonTitle, otherButtonColor: UIColor.red)
         userAction = action
         return self
     }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,otherButtonTitle:
-        String?, otherButtonColor: UIColor?,action: ((_ isOtherButton: Bool) -> Void)? = nil) {
+    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, buttonColor: UIColor, otherButtonTitle: String?, otherButtonColor: UIColor?, action: ((_ isOtherButton: Bool) -> Void)? = nil) {
         userAction = action
         let window: UIWindow = UIApplication.shared.keyWindow!
         window.addSubview(view)
         window.bringSubviewToFront(view)
         view.frame = window.bounds
+        
         self.setupContentView()
         self.setupTitleLabel()
         self.setupSubtitleTextView()
@@ -302,7 +299,6 @@ open class SweetAlert: UIViewController {
     }
 
     func animateAlert() {
-
         view.alpha = 0;
         UIView.animate(withDuration: 0.1, animations: { () -> Void in
             self.view.alpha = 1.0;
