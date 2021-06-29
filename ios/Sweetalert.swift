@@ -30,10 +30,13 @@ open class SweetAlert: UIViewController {
     var strongSelf: SweetAlert?
     var contentView = UIView()
     var titleLabel: UILabel = UILabel()
+    var subTitleTextView = UITextView()
+    var testingLabel = UITextView()
+//    var activityIndicator = UIActivityIndicatorView(frame: pending.view.bounds)
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var buttons: [UIButton] = []
     var animatedView: AnimatableView?
     var imageView: UIImageView?
-    var subTitleTextView = UITextView()
     var userAction: ((_ isOtherButton: Bool) -> Void)? = nil
     let kFont = "Helvetica"
 
@@ -54,14 +57,35 @@ open class SweetAlert: UIViewController {
 
     fileprivate func setupContentView() {
         contentView.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
-        contentView.layer.cornerRadius = 5.0
+        contentView.layer.cornerRadius = 9.0
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 0.5
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subTitleTextView)
+//        contentView.addSubview(activityIndicator)
+//        contentView.addSubview(titleLabel)
+//        contentView.addSubview(subTitleTextView)
         contentView.backgroundColor = UIColor.colorFromRGB(0xFFFFFF)
-        contentView.layer.borderColor = UIColor.colorFromRGB(0xCCCCCC).cgColor
+//        contentView.layer.borderColor = UIColor.colorFromRGB(0xCCCCCC).cgColor
         view.addSubview(contentView)
+//        view.backgroundColor = UIColor.brown
+    }
+    
+    fileprivate func setUpActivityIndicator() {
+//        activityIndicator.color = .green
+//        activityIndicator.frame = pendin
+//        activityIndicator.frame = CGRect(width: 100.0, height: 100.0)
+//        activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+//        activityIndicator.center = self.contentView.center
+//        activityIndicator.center = self.view.center
+//        activityIndicator.clipsToBounds = true
+//        activityIndicator.layer.cornerRadius = 10
+//        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 90, height: 90)
+//        activityIndicator.startAnimating()
+        testingLabel.text = "Testing Label"
+        testingLabel.textAlignment = .center
+        testingLabel.font = UIFont(name: kFont, size:16)
+        testingLabel.textColor = UIColor.colorFromRGB(0x797979)
+        testingLabel.isEditable = false
     }
 
     fileprivate func setupTitleLabel() {
@@ -87,75 +111,125 @@ open class SweetAlert: UIViewController {
         var y: CGFloat = KTopMargin
         let width: CGFloat = kContentWidth - (kWidthMargin*2)
 
-        if animatedView != nil {
-            animatedView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
-            contentView.addSubview(animatedView!)
-            y += kAnimatedViewHeight + kHeightMargin
+//        if animatedView != nil {
+//            animatedView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
+//            contentView.addSubview(animatedView!)
+//            y += kAnimatedViewHeight + kHeightMargin
+//        }
+//
+//        if imageView != nil {
+//            imageView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
+//            contentView.addSubview(imageView!)
+//            y += imageView!.frame.size.height + kHeightMargin
+//        }
+//
+//        activityIndicator.color = .green
+//        let myColor = Color(hex:0xF2C94C)
+        activityIndicator.color = colorWithHex(hex: "")
+//        let myColor = UIColor.init
+//        activityIndicator.color = UIColor.init(hex)
+//        activityIndicator.frame = pendin
+//        activityIndicator.frame = CGRect(width: 100.0, height: 100.0)
+        activityIndicator.frame = CGRect(x: x, y: y, width: width, height: kTitleHeight + 20)
+//        activityIndicator.center = self.contentView.center
+//        activityIndicator.center = self.view.center
+        activityIndicator.clipsToBounds = true
+        activityIndicator.layer.cornerRadius = 10
+//        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        let transform: CGAffineTransform = CGAffineTransform(scaleX: 1.9, y: 1.9)
+//        activityIndicator.transform = transform
+        activityIndicator.transform = CGAffineTransform(scaleX: 2.1, y: 2.1)
+//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 90, height: 90)
+        activityIndicator.startAnimating()
+        contentView.addSubview(activityIndicator)
+        y += kTitleHeight + 20
+        // Testing Title
+        if self.testingLabel.text != nil {
+            testingLabel.text = "Width is: \(width)"
+            testingLabel.frame = CGRect(x: x, y: y, width: width, height: kTitleHeight)
+            contentView.addSubview(testingLabel)
+            y += kTitleHeight + kHeightMargin
         }
-
-        if imageView != nil {
-            imageView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
-            contentView.addSubview(imageView!)
-            y += imageView!.frame.size.height + kHeightMargin
-        }
-
+        
         // Title
         if self.titleLabel.text != nil {
             titleLabel.frame = CGRect(x: x, y: y, width: width, height: kTitleHeight)
             contentView.addSubview(titleLabel)
             y += kTitleHeight + kHeightMargin
         }
-
-        // Subtitle
-        if self.subTitleTextView.text.isEmpty == false {
-            let subtitleString = subTitleTextView.text! as NSString
-            let rect = subtitleString.boundingRect(with: CGSize(width: width, height: 0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font:subTitleTextView.font!], context: nil)
-            textViewHeight = ceil(rect.size.height) + 10.0
-            subTitleTextView.frame = CGRect(x: x, y: y, width: width, height: textViewHeight)
-            contentView.addSubview(subTitleTextView)
-            y += textViewHeight + kHeightMargin
-        }
-
-        var buttonRect:[CGRect] = []
-        for button in buttons {
-            let string = button.title(for: UIControl.State())! as NSString
-            buttonRect.append(string.boundingRect(with: CGSize(width: width, height:0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:[NSAttributedString.Key.font:button.titleLabel!.font], context:nil))
-        }
-
-        var totalWidth: CGFloat = 0.0
-        if buttons.count == 2 {
-            totalWidth = buttonRect[0].size.width + buttonRect[1].size.width + kWidthMargin + 40.0
-        }
-        else{
-            totalWidth = buttonRect[0].size.width + 20.0
-        }
-        y += kHeightMargin
-        var buttonX = (kContentWidth - totalWidth ) / 2.0
-        for i in 0 ..< buttons.count {
-
-            buttons[i].frame = CGRect(x: buttonX, y: y, width: buttonRect[i].size.width + 20.0, height: buttonRect[i].size.height + 10.0)
-            buttonX = buttons[i].frame.origin.x + kWidthMargin + buttonRect[i].size.width + 20.0
-            buttons[i].layer.cornerRadius = 5.0
-            self.contentView.addSubview(buttons[i])
-            buttons[i].addTarget(self, action: #selector(SweetAlert.pressed(_:)), for: UIControl.Event.touchUpInside)
-
-        }
-        y += kHeightMargin + buttonRect[0].size.height + 10.0
-        if y > kMaxHeight {
-            let diff = y - kMaxHeight
-            let sFrame = subTitleTextView.frame
-            subTitleTextView.frame = CGRect(x: sFrame.origin.x, y: sFrame.origin.y, width: sFrame.width, height: sFrame.height - diff)
-
-            for button in buttons {
-                let bFrame = button.frame
-                button.frame = CGRect(x: bFrame.origin.x, y: bFrame.origin.y - diff, width: bFrame.width, height: bFrame.height)
-            }
-
-            y = kMaxHeight
-        }
+//
+//        // Subtitle
+//        if self.subTitleTextView.text.isEmpty == false {
+//            let subtitleString = subTitleTextView.text! as NSString
+//            let rect = subtitleString.boundingRect(with: CGSize(width: width, height: 0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font:subTitleTextView.font!], context: nil)
+//            textViewHeight = ceil(rect.size.height) + 10.0
+//            subTitleTextView.frame = CGRect(x: x, y: y, width: width, height: textViewHeight)
+//            contentView.addSubview(subTitleTextView)
+//            y += textViewHeight + kHeightMargin
+//        }
+//
+//        var buttonRect:[CGRect] = []
+//        for button in buttons {
+//            let string = button.title(for: UIControl.State())! as NSString
+//            buttonRect.append(string.boundingRect(with: CGSize(width: width, height:0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:[NSAttributedString.Key.font:button.titleLabel!.font], context:nil))
+//        }
+//
+//        var totalWidth: CGFloat = 0.0
+//        if buttons.count == 2 {
+//            totalWidth = buttonRect[0].size.width + buttonRect[1].size.width + kWidthMargin + 40.0
+//        }
+//        else{
+//            totalWidth = buttonRect[0].size.width + 20.0
+//        }
+//        y += kHeightMargin
+//        var buttonX = (kContentWidth - totalWidth ) / 2.0
+//        for i in 0 ..< buttons.count {
+//
+//            buttons[i].frame = CGRect(x: buttonX, y: y, width: buttonRect[i].size.width + 20.0, height: buttonRect[i].size.height + 10.0)
+//            buttonX = buttons[i].frame.origin.x + kWidthMargin + buttonRect[i].size.width + 20.0
+//            buttons[i].layer.cornerRadius = 5.0
+//            self.contentView.addSubview(buttons[i])
+//            buttons[i].addTarget(self, action: #selector(SweetAlert.pressed(_:)), for: UIControl.Event.touchUpInside)
+//
+//        }
+//        y += kHeightMargin + buttonRect[0].size.height + 10.0
+//        if y > kMaxHeight {
+//            let diff = y - kMaxHeight
+//            let sFrame = subTitleTextView.frame
+//            subTitleTextView.frame = CGRect(x: sFrame.origin.x, y: sFrame.origin.y, width: sFrame.width, height: sFrame.height - diff)
+//
+//            for button in buttons {
+//                let bFrame = button.frame
+//                button.frame = CGRect(x: bFrame.origin.x, y: bFrame.origin.y - diff, width: bFrame.width, height: bFrame.height)
+//            }
+//
+//            y = kMaxHeight
+//        }
 
         contentView.frame = CGRect(x: (mainScreenBounds.size.width - kContentWidth) / 2.0, y: (mainScreenBounds.size.height - y) / 2.0, width: kContentWidth, height: y)
         contentView.clipsToBounds = true
+    }
+    
+    func colorWithHex (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 
     @objc open func pressed(_ sender: UIButton!) {
@@ -177,7 +251,7 @@ open class SweetAlert: UIViewController {
         self.resizeAndRelayout()
     }
 
-    func closeAlert(_ buttonIndex:Int){
+    func closeAlert(_ buttonIndex: Int){
         if userAction !=  nil {
             let isOtherButton = buttonIndex == 0 ? true: false
             SweetAlertContext.shouldNotAnimate = true
@@ -205,34 +279,34 @@ open class SweetAlert: UIViewController {
         self.contentView = UIView()
     }
 
-    open func showAlert(_ title: String) -> SweetAlert {
-        _ =  showAlert(title, subTitle: nil, style: .none)
-        return self
-    }
+//    open func showAlert(_ title: String) -> SweetAlert {
+//        _ =  showAlert(title, subTitle: nil, style: .none)
+//        return self
+//    }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle) -> SweetAlert {
-        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: "OK")
-        return self
+//    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle) -> SweetAlert {
+//        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: "OK")
+//        return self
+//
+//    }
 
-    }
+//    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
+//        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: UIColor.colorFromRGB(0xAEDEF4))
+//        userAction = action
+//        return self
+//    }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: UIColor.colorFromRGB(0xAEDEF4))
-        userAction = action
-        return self
-    }
+//    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String, buttonColor: UIColor,action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
+//        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: buttonColor, otherButtonTitle: nil)
+//        userAction = action
+//        return self
+//    }
 
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle,buttonTitle: String, buttonColor: UIColor,action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        _ = showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: buttonColor, otherButtonTitle: nil)
-        userAction = action
-        return self
-    }
-
-    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, buttonColor: UIColor, otherButtonTitle: String?, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
-        self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: buttonColor, otherButtonTitle: otherButtonTitle, otherButtonColor: UIColor.red)
-        userAction = action
-        return self
-    }
+//    open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, buttonColor: UIColor, otherButtonTitle: String?, action: ((_ isOtherButton: Bool) -> Void)? = nil) -> SweetAlert {
+//        self.showAlert(title, subTitle: subTitle, style: style, buttonTitle: buttonTitle, buttonColor: buttonColor, otherButtonTitle: otherButtonTitle, otherButtonColor: UIColor.red)
+//        userAction = action
+//        return self
+//    }
 
     open func showAlert(_ title: String, subTitle: String?, style: AlertStyle, buttonTitle: String, buttonColor: UIColor, otherButtonTitle: String?, otherButtonColor: UIColor?, action: ((_ isOtherButton: Bool) -> Void)? = nil) {
         userAction = action
@@ -242,6 +316,7 @@ open class SweetAlert: UIViewController {
         view.frame = window.bounds
         
         self.setupContentView()
+        self.setUpActivityIndicator()
         self.setupTitleLabel()
         self.setupSubtitleTextView()
 
@@ -267,6 +342,7 @@ open class SweetAlert: UIViewController {
         if subTitle != nil {
             self.subTitleTextView.text = subTitle
         }
+        
         buttons = []
         if buttonTitle.isEmpty == false {
             let button: UIButton = UIButton(type: UIButton.ButtonType.custom)
@@ -288,7 +364,7 @@ open class SweetAlert: UIViewController {
 
         resizeAndRelayout()
         if SweetAlertContext.shouldNotAnimate == true {
-            //Do not animate Alert
+            // Do not animate Alert
             if self.animatedView != nil {
                 self.animatedView!.animate()
             }

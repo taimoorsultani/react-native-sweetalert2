@@ -21,6 +21,35 @@ class Sweetalert2: RCTViewManager {
     func showAlert(_ options:NSDictionary, acceptCallback:RCTResponseSenderBlock, cancelCallback:RCTResponseSenderBlock) -> Void {
         /* Get all params from option */
         let type: String = options.object(forKey: "type") as! String
+        var title: String = options.object(forKey: "title") as! String
+        if ((title ?? "").isEmpty) {
+            title = ""
+        }
+        var subTitle: String = options.object(forKey: "subTitle") as! String
+        if ((subTitle ?? "").isEmpty) {
+            subTitle = ""
+        }
+        var barColor: String = options.object(forKey: "barColor") as! String
+        if ((barColor ?? "").isEmpty) {
+            barColor = ""
+        }
+        
+        var cancellable: Bool = options.object(forKey: "cancellable") as! Bool
+        var dismissOnClick: Bool = options.object(forKey: "dismissOnClick") as! Bool
+        var showConfirmButton: Bool = options.object(forKey: "showConfirmButton") as! Bool
+        var showCancelButton: Bool = options.object(forKey: "showCancelButton") as! Bool
+        var showContentText: Bool = options.object(forKey: "showContentText") as! Bool
+        
+        var confirmButtonText: String = options.object(forKey: "confirmButtonText") as! String
+        var cancelButtonText: String = options.object(forKey: "cancelButtonText") as! String
+        var confirmButtonTextColor: String = options.object(forKey: "confirmButtonTextColor") as! String
+        var cancelButtonTextColor: String = options.object(forKey: "cancelButtonTextColor") as! String
+        var confirmButtonBackgroundColor: String = options.object(forKey: "confirmButtonBackgroundColor") as! String
+        var cancelButtonBackgroundColor: String = options.object(forKey: "cancelButtonBackgroundColor") as! String
+        
+        var titleSize: Int = options.object(forKey: "titleSize") as! Int
+        var subTitleSize: Int = options.object(forKey: "subTitleSize") as! Int
+        
         var convertedStyle = AlertStyle.none
         switch type {
             case "error":
@@ -35,27 +64,8 @@ class Sweetalert2: RCTViewManager {
             default:
                 convertedStyle = AlertStyle.none
         }
-        let title: String = options.object(forKey: "title") as! String
-        let subTitle: String = options.object(forKey: "subTitle") as! String
-        let barColor: String = options.object(forKey: "barColor") as! String
-        
-        let cancellable: Bool = options.object(forKey: "cancellable") as! Bool
-        let dismissOnClick: Bool = options.object(forKey: "dismissOnClick") as! Bool
-        let showConfirmButton: Bool = options.object(forKey: "showConfirmButton") as! Bool
-        let showCancelButton: Bool = options.object(forKey: "showCancelButton") as! Bool
-        let showContentText: Bool = options.object(forKey: "showContentText") as! Bool
-        
-        let confirmButtonText: String = options.object(forKey: "confirmButtonText") as! String
-        let cancelButtonText: String = options.object(forKey: "cancelButtonText") as! String
-        let confirmButtonTextColor: String = options.object(forKey: "confirmButtonTextColor") as! String
-        let cancelButtonTextColor: String = options.object(forKey: "cancelButtonTextColor") as! String
-        let confirmButtonBackgroundColor: String = options.object(forKey: "confirmButtonBackgroundColor") as! String
-        let cancelButtonBackgroundColor: String = options.object(forKey: "cancelButtonBackgroundColor") as! String
-        
-        let titleSize: Int = options.object(forKey: "titleSize") as! Int
-        let subTitleSize: Int = options.object(forKey: "subTitleSize") as! Int
         
         
-        _ = alert.showAlert(title, subTitle: subTitle, style: convertedStyle)
+        _ = alert.showAlert(title, subTitle: subTitle, style: convertedStyle, buttonTitle: "Button Text", buttonColor: UIColor.green, otherButtonTitle: "Other Button", otherButtonColor: UIColor.red)
     }
 }

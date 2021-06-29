@@ -50,9 +50,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2D02AA71268A5AFF00CA3DB4 /* SweetAlert */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SweetAlert;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				2D02AA71268A5AFF00CA3DB4 /* SweetAlert */,
 				2DB5E7F92686296A007665A5 /* Sweetalert.swift */,
 				F4FF95D6245B92E800C19C63 /* Sweetalert2.swift */,
 				B3E7B5891CC2AC0600A0062D /* Sweetalert2.m */,
@@ -177,6 +185,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -224,6 +234,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
