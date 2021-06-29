@@ -22,17 +22,19 @@ class Sweetalert2: RCTViewManager {
         /* Get all params from option */
         let type: String = options.object(forKey: "type") as! String
         var title: String = options.object(forKey: "title") as! String
-        if ((title ?? "").isEmpty) {
-            title = ""
-        }
+//        title = nil
+//        if (title?.isEmpty) {
+//            title = "Title was null"
+//        }
         var subTitle: String = options.object(forKey: "subTitle") as! String
-        if ((subTitle ?? "").isEmpty) {
-            subTitle = ""
-        }
+//        subTitle = nil
+//        if (subTitle?.isEmpty) {
+//            subTitle = "Sub title was null"
+//        }
         var barColor: String = options.object(forKey: "barColor") as! String
-        if ((barColor ?? "").isEmpty) {
-            barColor = ""
-        }
+//        if ((barColor ?? "").isEmpty) {
+//            barColor = ""
+//        }
         
         var cancellable: Bool = options.object(forKey: "cancellable") as! Bool
         var dismissOnClick: Bool = options.object(forKey: "dismissOnClick") as! Bool

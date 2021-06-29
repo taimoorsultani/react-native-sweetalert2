@@ -31,8 +31,6 @@ open class SweetAlert: UIViewController {
     var contentView = UIView()
     var titleLabel: UILabel = UILabel()
     var subTitleTextView = UITextView()
-    var testingLabel = UITextView()
-//    var activityIndicator = UIActivityIndicatorView(frame: pending.view.bounds)
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var buttons: [UIButton] = []
     var animatedView: AnimatableView?
@@ -60,32 +58,8 @@ open class SweetAlert: UIViewController {
         contentView.layer.cornerRadius = 9.0
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 0.5
-//        contentView.addSubview(activityIndicator)
-//        contentView.addSubview(titleLabel)
-//        contentView.addSubview(subTitleTextView)
         contentView.backgroundColor = UIColor.colorFromRGB(0xFFFFFF)
-//        contentView.layer.borderColor = UIColor.colorFromRGB(0xCCCCCC).cgColor
         view.addSubview(contentView)
-//        view.backgroundColor = UIColor.brown
-    }
-    
-    fileprivate func setUpActivityIndicator() {
-//        activityIndicator.color = .green
-//        activityIndicator.frame = pendin
-//        activityIndicator.frame = CGRect(width: 100.0, height: 100.0)
-//        activityIndicator.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
-//        activityIndicator.center = self.contentView.center
-//        activityIndicator.center = self.view.center
-//        activityIndicator.clipsToBounds = true
-//        activityIndicator.layer.cornerRadius = 10
-//        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 90, height: 90)
-//        activityIndicator.startAnimating()
-        testingLabel.text = "Testing Label"
-        testingLabel.textAlignment = .center
-        testingLabel.font = UIFont(name: kFont, size:16)
-        testingLabel.textColor = UIColor.colorFromRGB(0x797979)
-        testingLabel.isEditable = false
     }
 
     fileprivate func setupTitleLabel() {
@@ -111,45 +85,26 @@ open class SweetAlert: UIViewController {
         var y: CGFloat = KTopMargin
         let width: CGFloat = kContentWidth - (kWidthMargin*2)
 
-//        if animatedView != nil {
-//            animatedView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
-//            contentView.addSubview(animatedView!)
-//            y += kAnimatedViewHeight + kHeightMargin
-//        }
-//
+        if animatedView != nil {
+            animatedView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
+            contentView.addSubview(animatedView!)
+            y += kAnimatedViewHeight + kHeightMargin
+        }
+
 //        if imageView != nil {
 //            imageView!.frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
 //            contentView.addSubview(imageView!)
 //            y += imageView!.frame.size.height + kHeightMargin
 //        }
 //
-//        activityIndicator.color = .green
-//        let myColor = Color(hex:0xF2C94C)
         activityIndicator.color = colorWithHex(hex: "")
-//        let myColor = UIColor.init
-//        activityIndicator.color = UIColor.init(hex)
-//        activityIndicator.frame = pendin
-//        activityIndicator.frame = CGRect(width: 100.0, height: 100.0)
         activityIndicator.frame = CGRect(x: x, y: y, width: width, height: kTitleHeight + 20)
-//        activityIndicator.center = self.contentView.center
-//        activityIndicator.center = self.view.center
         activityIndicator.clipsToBounds = true
         activityIndicator.layer.cornerRadius = 10
-//        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        let transform: CGAffineTransform = CGAffineTransform(scaleX: 1.9, y: 1.9)
-//        activityIndicator.transform = transform
         activityIndicator.transform = CGAffineTransform(scaleX: 2.1, y: 2.1)
-//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 90, height: 90)
         activityIndicator.startAnimating()
         contentView.addSubview(activityIndicator)
         y += kTitleHeight + 20
-        // Testing Title
-        if self.testingLabel.text != nil {
-            testingLabel.text = "Width is: \(width)"
-            testingLabel.frame = CGRect(x: x, y: y, width: width, height: kTitleHeight)
-            contentView.addSubview(testingLabel)
-            y += kTitleHeight + kHeightMargin
-        }
         
         // Title
         if self.titleLabel.text != nil {
@@ -157,17 +112,17 @@ open class SweetAlert: UIViewController {
             contentView.addSubview(titleLabel)
             y += kTitleHeight + kHeightMargin
         }
-//
-//        // Subtitle
-//        if self.subTitleTextView.text.isEmpty == false {
-//            let subtitleString = subTitleTextView.text! as NSString
-//            let rect = subtitleString.boundingRect(with: CGSize(width: width, height: 0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font:subTitleTextView.font!], context: nil)
-//            textViewHeight = ceil(rect.size.height) + 10.0
-//            subTitleTextView.frame = CGRect(x: x, y: y, width: width, height: textViewHeight)
-//            contentView.addSubview(subTitleTextView)
-//            y += textViewHeight + kHeightMargin
-//        }
-//
+
+        // Subtitle
+        if self.subTitleTextView.text.isEmpty == false {
+            let subtitleString = subTitleTextView.text! as NSString
+            let rect = subtitleString.boundingRect(with: CGSize(width: width, height: 0.0), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font:subTitleTextView.font!], context: nil)
+            textViewHeight = ceil(rect.size.height) + 10.0
+            subTitleTextView.frame = CGRect(x: x, y: y, width: width, height: textViewHeight)
+            contentView.addSubview(subTitleTextView)
+            y += textViewHeight + kHeightMargin
+        }
+
 //        var buttonRect:[CGRect] = []
 //        for button in buttons {
 //            let string = button.title(for: UIControl.State())! as NSString
@@ -316,26 +271,25 @@ open class SweetAlert: UIViewController {
         view.frame = window.bounds
         
         self.setupContentView()
-        self.setUpActivityIndicator()
         self.setupTitleLabel()
         self.setupSubtitleTextView()
 
         switch style {
-        case .success:
-            self.animatedView = SuccessAnimatedView()
+            case .success:
+                self.animatedView = SuccessAnimatedView()
 
-        case .error:
-            self.animatedView = CancelAnimatedView()
+            case .error:
+                self.animatedView = CancelAnimatedView()
 
-        case .warning:
-            self.animatedView = InfoAnimatedView()
+            case .warning:
+                self.animatedView = InfoAnimatedView()
 
-        case let .customImage(imageFile):
-            if let image = UIImage(named: imageFile) {
-                self.imageView = UIImageView(image: image)
-            }
-        case .none:
-            self.animatedView = nil
+            case let .customImage(imageFile):
+                if let image = UIImage(named: imageFile) {
+                    self.imageView = UIImageView(image: image)
+                }
+            case .none:
+                self.animatedView = nil
         }
 
         self.titleLabel.text = title
